@@ -11,21 +11,21 @@
     <title>{{ config('app.name') }} | {{ isset($titre) ? $titre : '' }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Scripts -->
-    <script src="{{ asset('admin/js/app.js') }}" defer></script>
+    <script src="{{ asset('assets/js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="icon" href="{{ asset('assets/images/logo.png') }}" type="image/rdp-icon">
+    <link rel="icon" href="{{ asset('logo/logo.png') }}" type="image/rdp-icon">
 
     <!-- Styles -->
 
-    <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/js/sweetalert/sweetalert.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/css/summernote/summernote.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/js/sweetalert/sweetalert.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/summernote/summernote.css') }}" rel="stylesheet">
 
     @yield('autres_style')
 </head>
@@ -38,13 +38,13 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element">
                             <span>
-                                <img alt="image" class="img-circle" src="{{ asset('admin/img/default.png') }}"
+                                <img alt="image" class="img-circle" src="{{ asset('assets/img/default.png') }}"
                                     width="100" />
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear"> <span class="block m-t-xs"> <strong
                                             class="font-bold">{{ Auth::user()->name }}</strong>
-                                    </span> <span class="text-muted text-xs block">{{ Auth::user()->fonction }} <b
+                                    </span> <span class="block text-xs text-muted">{{ Auth::user()->fonction }} <b
                                             class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="">Profile</a></li>
@@ -72,15 +72,15 @@
                             <span class="pull-right label label-primary">Gestion</span></a>
                         <ul class="nav nav-second-level collapse">
                             <li class="{{ $titre == 'Gestion Banche' || $titre == 'Gestion Service' ? 'active' : '' }}">
-                                <a href="{{ route('dashboard') }}">
+                                <a href="">
                                     <span class="nav-label">Branches & Services</span></a>
                             </li>
                             <li class="{{ $titre == 'Gestion Temoignage' ? 'active' : '' }}">
-                                <a href="{{ route('G_temoignage') }}">
+                                <a href="">
                                     <span class="nav-label">Témoignages</span></a>
                             </li>
                             <li class="{{ $titre == 'Gestion Partenaire' ? 'active' : '' }}">
-                                <a href="{{ route('G_partenaire') }}">Partenaire</a>
+                                <a href="">Partenaire</a>
                             </li>
                         </ul>
                     </li>
@@ -89,33 +89,33 @@
                             <span class="pull-right label label-warning">Insertion</span></a>
                         <ul class="nav nav-second-level collapse">
                             <li class="{{ $titre == 'Ajout branche' ? 'active' : '' }}">
-                                <a href="{{ route('inserbranche') }}">
+                                <a href="">
                                     <span class="nav-label">Branche & Service</span></a>
                             </li>
                             <li class="{{ $titre == 'Ajout partenaire' ? 'active' : '' }}"><a
-                                    href="{{ route('inserpartenaire') }}">Partenaire</a></li>
+                                    href="">Partenaire</a></li>
                             <li class="{{ $titre == 'Ajout temoignage' ? 'active' : '' }}"><a
-                                    href="{{ route('insertemoignage') }}">Témoignage</a></li>
+                                    href="">Témoignage</a></li>
                         </ul>
                     </li>
 
                     <li class="{{ $titre == 'Messages' ? 'active' : '' }}"> 
-                        <a href="{{ route('G_message') }}"><i
+                        <a href=""><i
                                 class="fa fa-envelope-open"></i>
-                            <span class="nav-label">Messages</span>
-                            <span class="pull-right label label-danger">{{ $nbrmessage->count() }}</span></a>
+                            <span class="nav-label">Messages{{ Auth::user()->id }}</span>
+                            <span class="pull-right label label-danger">0</span></a>
                     </li>
                     <li class="{{ $titre == 'news letter' ? 'active' : '' }}"> 
-                        <a href="{{ route('G_neswsletter') }}"><i
+                        <a href=""><i
                                 class="fa fa-envelope-open"></i>
                             <span class="nav-label">News letter</span>
-                            <span class="pull-right label label-danger">{{ $nbrnews->count() }}</span></a>
+                            <span class="pull-right label label-danger">0</span></a>
                     </li>
                     <li class="{{ $titre == 'Utilisateurs' ? 'active' : '' }}"> 
-                        <a href="{{ route('G_users') }}">
+                        <a href="">
                             <i class="fa fa-user"></i>
                             <span class="nav-label">Utilisateurs</span>
-                            <span class="pull-right label label-danger">{{ $nbruser->count() }}</span></a>
+                            <span class="pull-right label label-danger">0</span></a>
                     </li>
                 </ul>
 
@@ -136,8 +136,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <span class="m-r-sm text-muted welcome-message">Bienvenue dans l'espace Admin du Groupe
-                                synapse.</span>
+                            <span class="m-r-sm text-muted welcome-message">Bienvenue dans l'espace Admin de {{ config('app.name') }}.</span>
                         </li>
 
                         <li>
@@ -175,19 +174,19 @@
     </div>
 
 
-    <script src="{{ asset('admin/js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ asset('admin/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
 
-    <script src="{{ asset('admin/js/metisMenu/jquery.metisMenu.js') }}"></script>
-    <script src="{{ asset('admin/js/slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('assets/js/metisMenu/jquery.metisMenu.js') }}"></script>
+    <script src="{{ asset('assets/js/slimscroll/jquery.slimscroll.min.js') }}"></script>
 
     <!-- Custom and plugin javascript -->
-    <script src="{{ asset('admin/js/inspinia.js') }}"></script>
-    <script src="{{ asset('admin/js/pace/pace.min.js') }}"></script>
-    <script src="{{ asset('admin/js/pace/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/js/inspinia.js') }}"></script>
+    <script src="{{ asset('assets/js/pace/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/js/pace/pace.min.js') }}"></script>
 
-    <script src="{{ asset('admin/js/sweetalert/sweetalert.min.js') }}"></script>
-    <script src="{{ asset('admin/js/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('assets/js/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('assets/js/summernote/summernote.min.js') }}"></script>
 
     @yield('autres-script')
 
